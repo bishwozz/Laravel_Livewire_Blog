@@ -53,7 +53,7 @@
         <div class="form__control">
           <label for="searchTitle">User</label>
           <select wire:model="userFilter" multiple>
-            <option value = "" >ANy</option>
+            <option value = "" >Any</option>
             @foreach ($userData as $user)
               <option value = "{{ $user->id }}" >{{ $user->name }}</option>
             @endforeach
