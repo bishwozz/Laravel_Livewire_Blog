@@ -112,7 +112,8 @@ class PostList extends Component
             // Handle image upload if applicable
             if ($this->image) {
                 $imagePath = $this->image->store('images');
-                $image = $imagePath;
+                $imagePathSave = 'images/' . $this->image->hashName();
+                $image = $imagePathSave;
             }
 
             Post::create([
@@ -178,9 +179,12 @@ class PostList extends Component
             if ($this->image) {
                 // Check if the image with the same hash already exists in storage
                 $existingImagePath = $this->image;
-                if (Storage::disk('local')->exists($existingImagePath)) {
+            
+                if (is_string($existingImagePath) && Storage::disk('local')->exists($existingImagePath)) {
+                    // The image path is already a string and exists in storage
                     $image = $existingImagePath;
-                } else {
+                } elseif ($this->image instanceof Illuminate\Http\UploadedFile) {
+                    // The image is an instance of UploadedFile (file upload)
                     $imagePath = $this->image->store('public/images');
                     $imagePathSave = 'images/' . $this->image->hashName();
                     $image = $imagePathSave;

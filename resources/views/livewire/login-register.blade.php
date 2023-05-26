@@ -1,5 +1,5 @@
+@include('page.flash-message')
 <main class="auth layout">
-
 @if(!$registerForm)
   <div class="container">
     <div class="layout__box">
@@ -10,15 +10,7 @@
       </div>
       <div class="layout__body">
         <h2 class="auth__tagline">Find your study partner</h2>
-        @if (session()->has('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
-        @elseif (session()->has('success'))
-          <div class="alert alert-danger">
-              {{ session('success') }}
-          </div>
-        @endif
+        
 
         <form class="form">
           <div class="form__group form__group">
