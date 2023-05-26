@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    @include('Page.flash-message')
+    @include('livewire.flash-message')
     <header>
         @include('layout.navbar')
     </header>

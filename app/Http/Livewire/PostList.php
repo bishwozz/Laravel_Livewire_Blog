@@ -171,21 +171,21 @@ class PostList extends Component
             ValidationRule::updatePostRules($this)
         );
 
-        if ($this->image) {
-            // Check if the image with the same hash already exists in storage
-            $existingImagePath = $this->image;
-            if (Storage::disk('local')->exists($existingImagePath)) {
-                $image = $existingImagePath;
-            } else {
-                $imagePath = $this->image->store('public/images');
-                $imagePathSave = 'images/' . $this->image->hashName();
-                $image = $imagePathSave;
-            }
-        }
+        
 
         try {
             // Handle image upload if applicable
-            
+            if ($this->image) {
+                // Check if the image with the same hash already exists in storage
+                $existingImagePath = $this->image;
+                if (Storage::disk('local')->exists($existingImagePath)) {
+                    $image = $existingImagePath;
+                } else {
+                    $imagePath = $this->image->store('public/images');
+                    $imagePathSave = 'images/' . $this->image->hashName();
+                    $image = $imagePathSave;
+                }
+            }
             
 
             Post::whereId($this->postId)->update([
@@ -238,6 +238,7 @@ class PostList extends Component
     public function logout()
     {
         Auth::logout();
+        session()->flash('success',"logout Successfully!!");
         return redirect('/login');
     }
     public function clearFilters()

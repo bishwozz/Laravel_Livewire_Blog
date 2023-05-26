@@ -26,3 +26,17 @@
 </script>
 @endif
 
+@if(session()->has('message'))
+<script>
+    Swal.fire({
+        icon: 'warning',
+        title: 'warning!',
+        text: '{{ session()->get('message') }}',
+        timer: 5000, // Display duration in milliseconds (5 seconds in this example)
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false
+    });
+</script>
+@endif
+
