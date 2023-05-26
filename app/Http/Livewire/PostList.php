@@ -61,8 +61,8 @@ class PostList extends Component
     {
 
         $posts = Post::where('title', 'LIKE', '%' . ($this->searchTitle ?? '') . '%')
-            ->when($this->userFilter, function ($query, $userFilter) {
-                return $query->where('user_id', $userFilter);
+            ->when($this->userFilter, function ($query) {
+                return $query->whereIn('user_id', $this->userFilter);
             })
             ->when($this->tagFilter, function ($query) {
                 return $query->where(function ($subquery) {

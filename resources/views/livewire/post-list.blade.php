@@ -52,7 +52,7 @@
 
         <div class="form__control">
           <label for="searchTitle">User</label>
-          <select wire:model="userFilter">
+          <select wire:model="userFilter" multiple>
             <option value = "" >ANy</option>
             @foreach ($userData as $user)
               <option value = "{{ $user->id }}" >{{ $user->name }}</option>
@@ -62,10 +62,8 @@
 
         <div class="form__control">
           <label for="searchTitle">Category</label>
-
-
           <select wire:model="categoryFilter" multiple class="custom-select">
-            <option value = "" >ANy</option>
+            <option value = "" >Any</option>
             @foreach ($categories as $category)
               <option value = "{{ $category->id }}" >{{ $category->name }}</option>
             @endforeach
