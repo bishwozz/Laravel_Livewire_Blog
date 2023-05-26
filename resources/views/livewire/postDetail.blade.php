@@ -25,11 +25,15 @@
         
             <div class="roomListRoom" style="margin:8em;">
                 <div>
-                     <a href="/home" class="btn action-button-two"> Back </a>
+                     <a href="/blog" class="btn action-button-two"> Back </a>
                  </div>
                  <br>
                 <div class="post-detail-image">
-                    <img src="" alt="Image"/>
+                    @if($postDetails->image)
+                        <img src="{{ asset('storage/'.$postDetails->image) }}" alt="Image" height="400px" style="object-fit: cover;">
+                    @else
+                        <img src="{{ asset('images/noImage.png') }}" alt="Default Image" height="200px" style="object-fit: cover;">
+                    @endif
                 </div>
                 <div class="post-detail-title">
                     <h1 style="font-size:26px;"> {{ $postDetails->title }} </h1>

@@ -17,38 +17,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-// Route::view('/login', 'livewire.main')->name('home');
 
 
+// Redirect to the login page if not logged in
+Route::redirect('/', '/login')->middleware('guest');
 
-// Route::get('/login', LoginRegister::class)->name('login');
-
-// Route::get('/home', Home::class)->name('home');
-
-// Route::get('/create-post', BlogPost::class)->name('create-post');
-
-// Route::get('home/post/{id}/details', 'App\Http\Livewire\Home@postDetails')->name('post.details');
-
-// Route::get('post/{id}/edit', 'App\Http\Livewire\BlogPost@postEdit')->name('post.edit');
-// Route::get('post/{id}/delete', 'App\Http\Livewire\Home@postDelete')->name('post.delete');
-
-
-////// exter
-
+// Redirect to the blog page if already logged in
+Route::redirect('/', '/blog')->middleware('auth');
 
 Route::get('/login', LoginRegister::class)->name('login');
 
-
  Route::middleware(['auth'])->group(function () {
-    
     Route::get('/logout', 'App\Http\Livewire\PostList@logout')->name('logout');
     Route::get('/blog', PostList::class)->name('blog');
-    Route::get('home/post/{id}/details', 'App\Http\Livewire\Home@postDetails')->name('post.details');
-    Route::get('post/{id}/edit', 'App\Http\Livewire\BlogPost@postEdit')->name('post.edit');
-    Route::get('post/{id}/delete', 'App\Http\Livewire\Home@postDelete')->name('post.delete');
+    Route::get('post/{id}/details', 'App\Http\Livewire\PostList@postDetails')->name('post.details');
 });
 

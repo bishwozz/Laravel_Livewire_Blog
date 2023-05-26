@@ -171,18 +171,21 @@ class PostList extends Component
             ValidationRule::updatePostRules($this)
         );
 
+        if ($this->image) {
+            // Check if the image with the same hash already exists in storage
+            $existingImagePath = $this->image;
+            if (Storage::disk('local')->exists($existingImagePath)) {
+                $image = $existingImagePath;
+            } else {
+                $imagePath = $this->image->store('public/images');
+                $imagePathSave = 'images/' . $this->image->hashName();
+                $image = $imagePathSave;
+            }
+        }
+
         try {
             // Handle image upload if applicable
-            if ($this->image) {
-                // Check if the image with the same hash already exists in storage
-                $existingImagePath = $this->image;
-                if (Storage::disk('local')->exists($existingImagePath)) {
-                    $image = $existingImagePath;
-                } else {
-                    $imagePath = $this->image->store('images');
-                    $image = $imagePath;
-                }
-            }
+            
             
 
             Post::whereId($this->postId)->update([
@@ -240,5 +243,17 @@ class PostList extends Component
     public function clearFilters()
     {
         $this->reset(['searchTitle', 'userFilter', 'categoryFilter', 'tagFilter']);
+    }
+
+    public function postDetails($id){
+        // Retrieve the blog details from the database based on the provided $id
+        $data = [
+            'postDetails' => Post::findOrFail($id),
+            'username' => Auth::user()->name,
+            'current_user' => Auth::user()->id,
+        ];
+
+        // Pass the blog details to the Blade template
+        return view('livewire.postDetail',$data)->layout('layout.base');
     }
 }

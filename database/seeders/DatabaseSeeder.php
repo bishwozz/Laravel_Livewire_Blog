@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Database\Seeders\PostSeeder;
 use Database\Seeders\MasterSeeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->time = $now;
         
         $this->call(MasterSeeder::class);
+        $this->call(PostSeeder::class);
         
     }
 }

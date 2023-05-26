@@ -23,10 +23,14 @@
                     </div>
                 </div>
                 <div class="roomListRoom__content">
-                    <a href="/home/post/{{ $post->id }}/details">{{ $post->title }}</a>
+                    <a href="/post/{{ $post->id }}/details">{{ $post->title }}</a>
                 </div>
                 <div>
+                @if($post->image)
                     <img src="{{ asset('storage/'.$post->image) }}" alt="Image" height="200px" style="object-fit: cover;">
+                @else
+                    <img src="{{ asset('images/noImage.png') }}" alt="Default Image" height="200px" style="object-fit: cover;">
+                @endif
                 </div>
                 <div class="roomListRoom__meta">
                     <a href="#" class="roomListRoom__joined">
