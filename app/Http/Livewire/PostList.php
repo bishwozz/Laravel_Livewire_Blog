@@ -114,7 +114,7 @@ class PostList extends Component
         try {
             // Handle image upload if applicable
             if ($this->image) {
-                $imagePath = $this->image->store('images');
+                $imagePath = $this->image->store('public/images');
                 $imagePathSave = 'images/' . $this->image->hashName();
                 $image = $imagePathSave;
             }

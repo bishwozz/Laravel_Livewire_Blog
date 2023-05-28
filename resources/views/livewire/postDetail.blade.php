@@ -32,7 +32,7 @@
                     @if($postDetails->image)
                         <img src="{{ asset('storage/'.$postDetails->image) }}" alt="Image" height="400px" style="object-fit: cover;">
                     @else
-                        <img src="{{ asset('images/noImage.png') }}" alt="Default Image" height="200px" style="object-fit: cover;">
+                        <img src="{{ asset('images/noImage.png') }}" alt="Default Image" height="400px" style="object-fit: cover;">
                     @endif
                 </div>
                 <div class="post-detail-title">
