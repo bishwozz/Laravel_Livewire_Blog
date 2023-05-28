@@ -64,9 +64,9 @@ Here is how you can run the project locally:
     php artisan db:seed
     ```
     this command will create 2 users (admin and normal user):
-     > email: admin@gmail.com , password: 111
+     > email: ram@gmail.com , password: 111
 
-     > email: user@gmail.com , password: 111 
+     > email: sita@gmail.com , password: 111 
 
 1. Run server 
     >  visit `laravel_blog.test` in your favorite browser in setup in xampp or laragon
@@ -82,6 +82,6 @@ Here is how you can run the project locally:
 
 1. Login credentials
     ```
-     > email: admin@gmail.com , password: password , Username/User : admin 
+     > email: ram@gmail.com , password: password , Username/User : ram 
 
-     > email: user@gmail.com , password: password 
+     > email: sita@gmail.com , password: password , Username/User : sita 
