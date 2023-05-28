@@ -20,16 +20,17 @@ use Illuminate\Support\Facades\Route;
 
 
 // Redirect to the login page if not logged in
-Route::redirect('/', '/login')->middleware('guest');
+Route::middleware('guest')->redirect('/', '/login');
 
 // Redirect to the blog page if already logged in
-Route::redirect('/', '/blog')->middleware('auth');
+Route::middleware('auth')->redirect('/', '/blog');
 
 Route::get('/login', LoginRegister::class)->name('login');
 
- Route::middleware(['auth'])->group(function () {
-    Route::get('/logout', 'App\Http\Livewire\PostList@logout')->name('logout');
+Route::middleware('auth')->group(function () {
+    Route::get('/logout', [PostList::class, 'logout'])->name('logout');
     Route::get('/blog', PostList::class)->name('blog');
-    Route::get('post/{id}/details', 'App\Http\Livewire\PostList@postDetails')->name('post.details');
+    Route::get('/post/{id}/details', [PostList::class, 'postDetails'])->name('post.details');
 });
+
 
