@@ -13,6 +13,8 @@ use Livewire\WithFileUploads;
 use App\Http\Request\ValidationRule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\PostImport;
  
 class PostList extends Component
 {
@@ -30,6 +32,7 @@ class PostList extends Component
     public $userFilter;
     public $tagFilter = [];
     public $categoryFilter;
+    public $file;
  
 
 
@@ -260,5 +263,21 @@ class PostList extends Component
 
         // Pass the blog details to the Blade template
         return view('livewire.postDetail',$data)->layout('layout.base');
+    }
+
+
+    public function import()
+    {
+        $this->validate([
+            'file' => 'required|mimes:xls,xlsx',
+        ]);
+
+        // Process the uploaded file
+        Excel::import(new PostImport, $this->file->path());
+
+        // Perform any additional processing or store the data as required
+
+        // Show a success message
+        session()->flash('message', 'Excel file imported successfully.');
     }
 }

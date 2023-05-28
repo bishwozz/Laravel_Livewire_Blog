@@ -1322,3 +1322,13 @@ a {
     color: #fff;
     margin-left: 5px;
   }
+
+
+  .excel_upload{
+    background-color: #5d75d6;
+    padding:1em;
+  }
+  .excel_upload>h1{
+    font-size: 20px;
+    padding-bottom: 1em;;
+  }

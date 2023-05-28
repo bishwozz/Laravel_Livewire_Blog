@@ -43,7 +43,26 @@
         @endif
 
       </div>
+        <!-- excel upload -->
+        <div class="excel_upload">
+          <h1>Import Excel Data</h1>
 
+            <form wire:submit.prevent="import">
+                <input type="file" wire:model="file" accept=".xls, .xlsx">
+                @error('file') <span class="error">{{ $message }}</span> @enderror
+
+                <button type="submit">Import</button>
+            </form>
+
+            @if (session()->has('message'))
+                <div class="success" style="color:green;">
+                    {{ session('message') }}
+                </div>
+            @endif
+        </div>
+        <br>
+
+      <!-- filter -->
       <div class="post-filter" style="margin-bottom:1em;">
         <div class="form__control">
           <label for="searchTitle">Title</label>
@@ -101,3 +120,34 @@
 
   </div>
 </main>
+<script lang="javascript" src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js" ></script>
+/* resources\views\livewire\excel-importer.blade.php */
+<script>
+
+window.addEventListener('import-processing', event => {
+  alert('Data has been sent for processing!');
+});
+
+  // Reader and File Reference
+  var reader = new FileReader();
+  var fileElement = document.querySelector('#myFile');
+
+  function process(){
+    // Content as an ArrayBuffer
+    reader.readAsArrayBuffer(fileElement.files[0]);
+    reader.onload = function(event) {
+        // Parse raw content
+        var workbook = XLSX.read( event.target.result );
+        // Release after read
+        event.target.result = null; 
+        workbook.SheetNames.forEach(function(sheetName) {
+            // Current sheet
+            var sheet = workbook.Sheets[sheetName];
+
+            // Include header param to return array of arrays
+            var rows  = XLSX.utils.sheet_to_json(sheet, {header:1});
+        });
+        
+    } // End reader.onload 
+  } // End process()
+</script>
