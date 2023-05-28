@@ -1,4 +1,4 @@
-@include('page.flash-message')
+
 <main class="auth layout">
 @if(!$registerForm)
   <div class="container">
